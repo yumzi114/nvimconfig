@@ -1,0 +1,102 @@
+-- Disable compatibility with old-time vi
+vim.o.compatible = false
+
+-- Enable line numbers
+vim.wo.number = true
+
+-- Enable syntax highlighting
+vim.cmd('syntax on')
+
+-- Enable file type detection and plugins
+vim.cmd('filetype plugin indent on')
+
+-- Use spaces instead of tabs
+vim.o.expandtab = true
+
+-- Set the width of a tab to 4 spaces
+vim.o.tabstop = 4
+
+-- Set the number of spaces to use for each step of (auto)indent
+vim.o.shiftwidth = 4
+
+-- Show matching parentheses and brackets
+vim.o.showmatch = true
+
+-- Ignore case when searching
+vim.o.ignorecase = true
+
+-- Highlight search matches
+vim.o.hlsearch = true
+
+-- Incremental search
+vim.o.incsearch = true
+
+-- Enable mouse support
+vim.o.mouse = 'a'
+
+-- Use system clipboard
+vim.o.clipboard = 'unnamedplus'
+
+-- Enable 24-bit RGB color in the TUI
+vim.o.termguicolors = true
+
+-- Display the current cursor line
+vim.wo.cursorline = true
+
+-- Show the current column number in the status line
+vim.o.ruler = true
+
+- Enable line 
+vim.o.wrap = true
+
+-- Set a color scheme (requires that the color scheme is installed)
+vim.cmd('colorscheme desert')
+
+-- Configure split windows
+vim.o.splitbelow = true
+vim.o.splitright = true
+
+-- Set a 80 column border for good coding style
+vim.o.colorcolumn = '80'
+
+-- Use incremental search
+vim.o.incsearch = true
+
+-- Set default command to save and quit
+vim.cmd('command! WQ wq')
+
+-- Map <leader> key to space
+vim.g.mapleader = " "
+
+-- Custom key mappings
+vim.api.nvim_set_keymap('n', '<leader>e', ':Explore<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>f', ':Files<CR>', { noremap = true, silent = true })
+
+-- Initialize packer.nvim
+require('packer').startup(function(use)
+    -- Packer itself
+    use 'wbthomason/packer.nvim'
+
+    -- Add other plugins here
+    use 'nvim-tree/nvim-tree.lua'
+    use 'nvim-tree/nvim-web-devicons' -- for file icons
+end)
+
+-- nvim-tree setup
+require('nvim-tree').setup({
+    sort_by = "case_sensitive",
+    view = {
+        adaptive_size = true,
+        mappings = {
+            list = {
+                { key = "u", action = "dir_up" },
+            },
+        },
+    },
+    renderer = {
+        group_empty = true,
+    },
+    filters = {
+        dotfiles = true,
+    },
+})
